@@ -38,7 +38,7 @@ public class Login{
         login_button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 try{
-                   String query = "select * from Users where username = ? and password = ?";
+                  String query = "select * from Users where username = ? and password = ?";
                   PreparedStatement statement = con.prepareStatement(query);
                   String user = username_input.getText();
                   String pass = new String(password_input.getPassword());
@@ -47,6 +47,8 @@ public class Login{
                   ResultSet rs = statement.executeQuery();
                   if(rs.next()){
                     JOptionPane.showMessageDialog(null,"Logged In");
+                    int user_id = rs.getInt("id");
+                    new Student(user,user_id);
                   }
                   else{
                     JOptionPane.showMessageDialog(null,"Loggin Failed ");
