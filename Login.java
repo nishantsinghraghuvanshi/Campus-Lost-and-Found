@@ -46,9 +46,15 @@ public class Login{
                   statement.setString(2,pass);
                   ResultSet rs = statement.executeQuery();
                   if(rs.next()){
-                    JOptionPane.showMessageDialog(null,"Logged In");
-                    int user_id = rs.getInt("id");
-                    new Student(user,user_id);
+                    String role = rs.getString("role");
+                    if(role.equals("student")){
+                      JOptionPane.showMessageDialog(null,"Logged In");
+                      int user_id = rs.getInt("id");
+                      new Student(user,user_id);
+                    }
+                    if(role.equals("admin")){
+                      JOptionPane.showMessageDialog(null,"Welcome Admin");
+                    }
                   }
                   else{
                     JOptionPane.showMessageDialog(null,"Loggin Failed ");
